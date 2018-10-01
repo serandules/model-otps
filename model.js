@@ -3,17 +3,30 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var mongins = require('mongins');
-var types = require('validators').types;
+var validators = require('validators');
+var types = validators.types;
+var values = validators.values;
+
+var TOKEN_LENGTH = 48;
+var TOKEN_SIZE = 2 * TOKEN_LENGTH;
 
 var otp = Schema({
-    value: {
-        type: String,
-        required: true,
-        server: true,
-        validator: types.string({
-            length: 96
-        })
-    }
+  name: {
+    type: String,
+    required: true,
+    validator: types.string({
+      length: 50
+    })
+  },
+  value: {
+    type: String,
+    required: true,
+    server: true,
+    validator: types.string({
+      length: TOKEN_SIZE
+    }),
+    value: values.random({size: TOKEN_LENGTH})
+  }
 }, {collection: 'otps'});
 
 otp.plugin(mongins);
