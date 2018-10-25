@@ -29,7 +29,7 @@ var otp = Schema({
   }
 }, {collection: 'otps'});
 
-otp.plugin(mongins);
+otp.plugin(mongins());
 otp.plugin(mongins.user);
 otp.plugin(mongins.createdAt());
 otp.plugin(mongins.updatedAt({expires: 600}));
