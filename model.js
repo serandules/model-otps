@@ -11,7 +11,7 @@ var values = validators.values;
 var TOKEN_LENGTH = 48;
 var TOKEN_SIZE = 2 * TOKEN_LENGTH;
 
-var otp = Schema({
+var schema = Schema({
   name: {
     type: String,
     required: true,
@@ -30,9 +30,11 @@ var otp = Schema({
   }
 }, {collection: 'otps'});
 
-otp.plugin(mongins());
-otp.plugin(mongins.user);
-otp.plugin(mongins.createdAt());
-otp.plugin(mongins.updatedAt({expires: 600}));
+schema.plugin(mongins());
+schema.plugin(mongins.user);
+schema.plugin(mongins.permissions());
+schema.plugin(mongins.visibility());
+schema.plugin(mongins.createdAt());
+schema.plugin(mongins.updatedAt({expires: 600}));
 
-module.exports = mongoose.model('otps', otp);
+module.exports = mongoose.model('otps', schema);
