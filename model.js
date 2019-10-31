@@ -35,6 +35,7 @@ schema.plugin(mongins.user);
 schema.plugin(mongins.permissions());
 schema.plugin(mongins.visibility());
 schema.plugin(mongins.createdAt());
-schema.plugin(mongins.updatedAt({expires: 600}));
+schema.plugin(mongins.updatedAt());
+schema.plugin(mongins.modifiedAt({expires: 600}));
 
 module.exports = mongoose.model('otps', schema);
