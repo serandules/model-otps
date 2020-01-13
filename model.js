@@ -11,18 +11,41 @@ var values = validators.values;
 var TOKEN_LENGTH = 48;
 var TOKEN_SIZE = 2 * TOKEN_LENGTH;
 
+var WEAK_TOKEN_LENGTH = 3;
+var WEAK_TOKEN_SIZE = 2 * WEAK_TOKEN_LENGTH;
+
 var schema = Schema({
   name: {
     type: String,
     required: true,
+    index: true,
     validator: types.string({
       length: 50
     })
   },
-  value: {
+  for: {
+    type: String,
+    server: true,
+    index: true,
+    validator: types.string({
+      length: 200
+    })
+  },
+  weak: {
     type: String,
     required: true,
     server: true,
+    index: true,
+    validator: types.string({
+      length: WEAK_TOKEN_SIZE
+    }),
+    value: values.random({size: WEAK_TOKEN_LENGTH})
+  },
+  strong: {
+    type: String,
+    required: true,
+    server: true,
+    index: true,
     validator: types.string({
       length: TOKEN_SIZE
     }),
