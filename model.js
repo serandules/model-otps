@@ -55,6 +55,7 @@ var schema = Schema({
 
 schema.plugin(mongins());
 schema.plugin(mongins.user());
+schema.plugin(mongins._());
 schema.plugin(mongins.permissions());
 schema.plugin(mongins.visibility());
 schema.plugin(mongins.createdAt());
